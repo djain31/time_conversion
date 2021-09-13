@@ -1,0 +1,22 @@
+# Asking for input and using strip() so that it removes spaces.
+# Samples inputs can be in this form 07:05:45PM
+ins = input().strip()
+
+# checking if the last two characters are am or pm..so that the answer will come in Boolean value.
+is_pm = ins[-2:].lower() == "pm"
+
+# Extracting the first 3 integers of the timestamp with ":" as separator
+time_list = list(map(int, ins[:-2].split(':')))
+
+# if the input time is in pm and time is less than 12 hours then add 12 to the number of hours
+# thereby converting it to 24 hours format
+if is_pm and time_list[0] < 12:
+    time_list[0] += 12
+
+# if the input time is not pm and the current time is 12 then according to 24 hours format
+# make the current format to 0
+if not is_pm and time_list[0] == 12:
+    time_list[0] = 0
+
+#joininng and printing
+print(str(time_list[0]).rjust(2, '0') + ":" + str(time_list[1]).rjust(2, '0') + ":" + str(time_list[2]).rjust(2, '0'))
